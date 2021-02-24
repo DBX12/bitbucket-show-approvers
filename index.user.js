@@ -73,7 +73,6 @@
     }
 
     function handleCommitHashList(hashList) {
-        console.info("Got " + hashList.length + " commits")
         let promises = [];
         for (let hash of hashList) {
             promises.push(getApproversForCommit(hash));
@@ -116,21 +115,17 @@
 
     function updateCommitsHtml() {
         let commitTable = $(COMMIT_TABLE_SELECTOR);
-        console.debug(commitTable);
         commitTable.find('colgroup').append('<col class="foo"/>');
         for (let index in commitData) {
             let hash = commitData[index].hash;
             let participants = commitData[index].participants;
             let message = [];
-            console.debug('Checking ' + hash);
             let tableRow = $(COMMIT_TABLE_SELECTOR + ' span:contains("' + hash.substr(0, 7) + '")').first().parent().parent().parent().parent();
             if (tableRow.length === 0) {
                 // the commit is not shown yet, do not process the entry
-                console.debug('  commit not shown yet');
                 continue;
             }
             for (let pName in participants) {
-                console.debug('  ' + pName);
                 if (participants[pName].approved && !participants[pName].applied) {
                     let checkmarkNode = '<span title="' + pName + '">';
                     if (pName === settings.bb_displayName) {
