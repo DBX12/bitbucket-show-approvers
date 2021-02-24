@@ -8,6 +8,8 @@
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @run-at       document-end
 // @grant        GM.xmlHttpRequest
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 (function() {
@@ -171,7 +173,14 @@
             bb_username: '',
             bb_appPassword: ''
         }
-        settings = DEFAULT_SETTINGS;
+        for (let key in DEFAULT_SETTINGS) {
+            let value = GM_getValue(key, '!unset!');
+            if ( value === '!unset!') {
+                value = DEFAULT_SETTINGS[key]
+                GM_setValue(key, value);
+            }
+            settings[key] = value;
+        }
     }
 
 
