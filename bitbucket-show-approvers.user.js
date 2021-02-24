@@ -10,6 +10,8 @@
 // @grant        GM.xmlHttpRequest
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @updateURL    https://github.com/DBX12/bitbucket-show-approvers/raw/master/bitbucket-show-approvers.user.js
+// @downloadURL  https://github.com/DBX12/bitbucket-show-approvers/raw/master/bitbucket-show-approvers.user.js
 // ==/UserScript==
 
 (function () {
