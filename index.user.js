@@ -18,11 +18,10 @@
     let repositoryName = "";
     let commitData = {};
 
+    let settings = {};
+
 
     const API_BASE="https://bitbucket.org/api/2.0/";
-    const APP_USER='';
-    const APP_PASSWORD='';
-    const HIGHLIGHT_NAME = '';
 
     let $ = window.jQuery;
 
@@ -58,7 +57,7 @@
                 url: apiEndpoint.toString(),
                 method:'GET',
                 headers:{
-                    "Authorization": "Basic "+btoa(APP_USER+':'+APP_PASSWORD)
+                    "Authorization": "Basic "+btoa(settings.bb_username+':'+settings.bb_appPassword)
                 },
                 onreadystatechange: function(response){
                     if(response.readyState === 4){
@@ -90,7 +89,7 @@
                 url: apiEndpoint.toString(),
                 method:'GET',
                 headers:{
-                    "Authorization": "Basic "+btoa(APP_USER+':'+APP_PASSWORD)
+                    "Authorization": "Basic "+btoa(settings.bb_username+':'+settings.bb_appPassword)
                 },
                 onreadystatechange: function(response){
                     if(response.readyState === 4){
@@ -128,11 +127,11 @@
                 console.debug('  commit not shown yet');
                 continue;
             }
-            for(let pName in participants){
-                console.debug('  '+pName);
-                if(participants[pName].approved && ! participants[pName].applied ){
-                    let checkmarkNode = '<span title="'+pName+'">';
-                    if(pName === HIGHLIGHT_NAME){
+            for (let pName in participants) {
+                console.debug('  ' + pName);
+                if (participants[pName].approved && !participants[pName].applied) {
+                    let checkmarkNode = '<span title="' + pName + '">';
+                    if (pName === settings.bb_displayName) {
                         checkmarkNode += SVG_CHECKMARK_GREEN;
                     }else{
                         checkmarkNode += SVG_CHECKMARK_GREY;
@@ -166,6 +165,15 @@
         observer.observe(headline.get(0),{childList:true})
     }
 
+    function loadSettings(){
+        const DEFAULT_SETTINGS = {
+            bb_displayName: '',
+            bb_username: '',
+            bb_appPassword: ''
+        }
+        settings = DEFAULT_SETTINGS;
+    }
+
 
 
     function startScript(){
@@ -178,5 +186,6 @@
             });
         });
     }
+    loadSettings();
     setTimeout(startScript, 6000);
 })();
