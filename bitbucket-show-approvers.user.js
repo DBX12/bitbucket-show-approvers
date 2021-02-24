@@ -64,6 +64,7 @@
                 headers: {
                     "Authorization": "Basic " + btoa(settings.bb_username + ':' + settings.bb_appPassword)
                 },
+                nocache: true,
                 onreadystatechange: function (response) {
                     if (response.readyState === 4) {
                         let json = JSON.parse(response.responseText);
@@ -95,6 +96,7 @@
                 headers: {
                     "Authorization": "Basic " + btoa(settings.bb_username + ':' + settings.bb_appPassword)
                 },
+                nocache: true,
                 onreadystatechange: function (response) {
                     if (response.readyState === 4) {
                         let json = JSON.parse(response.responseText);
