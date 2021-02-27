@@ -15,3 +15,9 @@ To work with the API, you will need to provide the script with your username and
 implies `repository` (read) to work correctly. The option `bb_displayName` is used to determine if the approval was made
 by you or someone else (to show the checkmark in either green or grey). As nick name and display name can be a bit
 confusing, you see your display name in the reviewer list in the right side bar.
+
+## Auto-Updates
+
+The script supports auto-updates, however, when you edit a script via the TamperMonkey editor, the auto-update is
+deactivated automatically (to preserve your changes). So, if you had to tamper (heh) with the script and now want to
+receive updates again, make sure you checked the checkbox "Check for updates" on the script's settings page. 
