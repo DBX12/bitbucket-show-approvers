@@ -171,7 +171,8 @@
         const DEFAULT_SETTINGS = {
             bb_displayName: '',
             bb_username: '',
-            bb_appPassword: ''
+            bb_appPassword: '',
+            activationDelay: 5000
         }
         for (let key in DEFAULT_SETTINGS) {
             let value = GM_getValue(key, '!unset!');
@@ -196,5 +197,5 @@
     }
 
     loadSettings();
-    setTimeout(startScript, 6000);
+    setTimeout(startScript, settings['activationDelay']);
 })();
