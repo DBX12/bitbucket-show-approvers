@@ -148,6 +148,10 @@
             }
             tableRow.append('<td>' + message.join('') + '</td>');
         }
+        if(settings['removeEmptyTds']){
+            commitTable.find('tr > td > div:empty').remove();
+            commitTable.find('tr > td:empty').remove();
+        }
     }
 
     function mutationCallback(mutationsList) {
@@ -175,7 +179,8 @@
             bb_displayName: '',
             bb_username: '',
             bb_appPassword: '',
-            activationDelay: 5000
+            activationDelay: 5000,
+            removeEmptyTds: true
         }
         for (let key in DEFAULT_SETTINGS) {
             let value = GM_getValue(key, '!unset!');
