@@ -120,7 +120,10 @@
 
     function updateCommitsHtml() {
         let commitTable = $(COMMIT_TABLE_SELECTOR);
-        commitTable.find('colgroup').append('<col class="foo"/>');
+        let colGroup =commitTable.find('colgroup')
+        if(colGroup.find('col.approvers').length === 0 ) {
+            colGroup.append('<col class="approvers"/>');
+        }
         for (let index in commitData) {
             let hash = commitData[index].hash;
             let participants = commitData[index].participants;
