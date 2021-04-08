@@ -29,6 +29,7 @@ There is an illustrated [step-by-step guide] on stackoverflow on how to activate
 | bb_appPassword  | App password for the login, created [here][app passwords]                                                                     |
 | activationDelay | Delay in milliseconds before the script attempts to modify the page.                                                          |
 | removeEmptyTds  | Adds a call which removes empty `<td>` elements from the table. Defaults to true.                                             |
+| debugOutput     | Enables the debug output with the tag `[BBCA]` on level `debug`. Defaults to false.                                           |
 
 ## Auto-Updates
 

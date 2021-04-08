@@ -180,7 +180,8 @@
             bb_username: '',
             bb_appPassword: '',
             activationDelay: 5000,
-            removeEmptyTds: true
+            removeEmptyTds: true,
+            debugOutput: false
         }
         for (let key in DEFAULT_SETTINGS) {
             let value = GM_getValue(key, '!unset!');
@@ -202,6 +203,18 @@
                 updateCommitsHtml();
             });
         });
+    }
+
+    function debugOutput(msg) {
+        // noinspection EqualityComparisonWithCoercionJS
+        if (settings['debugOutput'] == true){
+            if(typeof msg == "string") {
+                console.debug("[BBCA] " + msg)
+            }else{
+                console.debug("[BBCA] Object follows")
+                console.debug(msg)
+            }
+        }
     }
 
     loadSettings();
