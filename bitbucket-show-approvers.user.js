@@ -24,6 +24,7 @@
     let commitData = {};
 
     let settings = {};
+    let alreadyProcessedParticipants = {};
 
 
     const API_BASE = "https://bitbucket.org/api/2.0/";
@@ -134,17 +135,30 @@
                 continue;
             }
             for (let pName in participants) {
-                if (participants[pName].approved && !participants[pName].applied) {
-                    let checkmarkNode = '<span title="' + pName + '">';
-                    if (pName === settings.bb_displayName) {
-                        checkmarkNode += SVG_CHECKMARK_GREEN;
-                    } else {
-                        checkmarkNode += SVG_CHECKMARK_GREY;
-                    }
-                    checkmarkNode += '</span>';
-                    message.push(checkmarkNode);
-                    participants[pName].applied = true;
+                if(participants[pName].approved === false){
+                    debugOutput(pName+" has not approved")
+                    continue;
                 }
+                if(alreadyProcessedParticipants.hasOwnProperty(hash)){
+                    debugOutput(hash+" is known in the alreadyProcessedParticipants object")
+                    if (alreadyProcessedParticipants[hash].includes(pName)) {
+                        debugOutput("Approval of "+pName+" is already shown");
+                        continue;
+                    }
+                }
+                let checkmarkNode = '<span title="' + pName + '">';
+                if (pName === settings.bb_displayName) {
+                    checkmarkNode += SVG_CHECKMARK_GREEN;
+                } else {
+                    checkmarkNode += SVG_CHECKMARK_GREY;
+                }
+                checkmarkNode += '</span>';
+                message.push(checkmarkNode);
+                participants[pName].applied = true;
+                if (!alreadyProcessedParticipants.hasOwnProperty(hash)){
+                    alreadyProcessedParticipants[hash] = [];
+                }
+                alreadyProcessedParticipants[hash].push(pName)
             }
             tableRow.append('<td>' + message.join('') + '</td>');
         }
@@ -152,6 +166,7 @@
             commitTable.find('tr > td > div:empty').remove();
             commitTable.find('tr > td:empty').remove();
         }
+        debugOutput(alreadyProcessedParticipants)
     }
 
     function mutationCallback(mutationsList) {
