@@ -168,7 +168,7 @@
         }
     }
 
-    function addButtonToCommitsHeadline() {
+    function registerMutationObserver() {
         let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
         let observer = new MutationObserver(mutationCallback);
         observer.observe(headline.get(0), {childList: true})
@@ -195,7 +195,7 @@
 
     function startScript() {
         identifyPrData();
-        addButtonToCommitsHeadline();
+        registerMutationObserver();
         loadCommitHashes().then(hashList => {
             handleCommitHashList(hashList).then(results => {
                 commitData = results
