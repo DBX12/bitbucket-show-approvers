@@ -174,6 +174,29 @@
         observer.observe(headline.get(0), {childList: true})
     }
 
+    function addRefreshButton() {
+        let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
+        let button = $('<button>Update approvers</button>');
+        button.click(
+            function (ev) {
+                refreshApprovers();
+                ev.stopPropagation();
+            });
+        headline.append(button);
+    }
+
+    function refreshApprovers() {
+       debugOutput("Started to load / refresh approvers")
+        loadCommitHashes().then(hashList => {
+            debugOutput("Commit hashes received, querying commit details")
+            handleCommitHashList(hashList).then(results => {
+                debugOutput("All commit details received, updating HTML")
+                commitData = results
+                updateCommitsHtml();
+            });
+        });
+    }
+
     function loadSettings() {
         const DEFAULT_SETTINGS = {
             bb_displayName: '',
@@ -197,12 +220,8 @@
     function startScript() {
         identifyPrData();
         registerMutationObserver();
-        loadCommitHashes().then(hashList => {
-            handleCommitHashList(hashList).then(results => {
-                commitData = results
-                updateCommitsHtml();
-            });
-        });
+        addRefreshButton();
+        refreshApprovers();
     }
 
     function debugOutput(msg) {
