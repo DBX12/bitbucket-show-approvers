@@ -31,8 +31,8 @@
 
     let $ = window.jQuery;
 
-    const COMMIT_TABLE_HEADLINE_SELECTOR = 'section[data-qa="pr-commit-list-styles"] h2';
-    const COMMIT_TABLE_SELECTOR = 'section[data-qa="pr-commit-list-styles"] table';
+    const COMMIT_TABLE_HEADLINE_SELECTOR = 'section[data-qa="commit-list-styles"] h2';
+    const COMMIT_TABLE_SELECTOR = 'section[data-qa="commit-list-styles"] table';
     const SVG_CHECKMARK_GREEN = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="scale:0.6;"><circle fill="#14892C" cx="12" cy="12" r="12"/><path fill="#FFF" d="M17.869 9.49l-1.201-1.342c-.176-.199-.482-.199-.678 0l-5.309 6.064c-.176.223-.48.223-.68 0l-1.92-2.188c-.197-.225-.504-.225-.68 0L6.2 13.366c-.176.225-.176.57 0 .77l3.037 3.48c.176.197.547.371.809.371h.568c.262 0 .611-.174.809-.371l6.445-7.355c.175-.199.175-.546.001-.771z"/></svg>';
     const SVG_CHECKMARK_GREY = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="scale:0.6;filter:grayscale(1.0);"><circle fill="#14892C" cx="12" cy="12" r="12"/><path fill="#FFF" d="M17.869 9.49l-1.201-1.342c-.176-.199-.482-.199-.678 0l-5.309 6.064c-.176.223-.48.223-.68 0l-1.92-2.188c-.197-.225-.504-.225-.68 0L6.2 13.366c-.176.225-.176.57 0 .77l3.037 3.48c.176.197.547.371.809.371h.568c.262 0 .611-.174.809-.371l6.445-7.355c.175-.199.175-.546.001-.771z"/></svg>';
 
