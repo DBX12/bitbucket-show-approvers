@@ -26,6 +26,8 @@
     let settings = {};
     let alreadyProcessedParticipants = {};
 
+    let inhibitLoading = false;
+
 
     const API_BASE = "https://bitbucket.org/api/2.0/";
 
@@ -33,6 +35,7 @@
 
     const COMMIT_TABLE_HEADLINE_SELECTOR = 'section[data-qa="commit-list-styles"] h2';
     const COMMIT_TABLE_SELECTOR = 'section[data-qa="commit-list-styles"] table';
+    const LOAD_MORE_COMMITS_SELECTOR = 'button > span:contains("Load more commits")';
     const SVG_CHECKMARK_GREEN = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="scale:0.6;"><circle fill="#14892C" cx="12" cy="12" r="12"/><path fill="#FFF" d="M17.869 9.49l-1.201-1.342c-.176-.199-.482-.199-.678 0l-5.309 6.064c-.176.223-.48.223-.68 0l-1.92-2.188c-.197-.225-.504-.225-.68 0L6.2 13.366c-.176.225-.176.57 0 .77l3.037 3.48c.176.197.547.371.809.371h.568c.262 0 .611-.174.809-.371l6.445-7.355c.175-.199.175-.546.001-.771z"/></svg>';
     const SVG_CHECKMARK_GREY = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="scale:0.6;filter:grayscale(1.0);"><circle fill="#14892C" cx="12" cy="12" r="12"/><path fill="#FFF" d="M17.869 9.49l-1.201-1.342c-.176-.199-.482-.199-.678 0l-5.309 6.064c-.176.223-.48.223-.68 0l-1.92-2.188c-.197-.225-.504-.225-.68 0L6.2 13.366c-.176.225-.176.57 0 .77l3.037 3.48c.176.197.547.371.809.371h.568c.262 0 .611-.174.809-.371l6.445-7.355c.175-.199.175-.546.001-.771z"/></svg>';
 
@@ -200,6 +203,44 @@
         headline.append(button);
     }
 
+    function addLoadAllCommitsButton() {
+        let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
+        let button = $('<button>Load all commits</button>');
+        button.click(
+            function (ev) {
+                inhibitLoading = false;
+                loadMoreCommits();
+                ev.stopPropagation();
+            });
+        headline.append(button);
+    }
+
+    function addStopLoadingCommitsButton() {
+        let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
+        let button = $('<button>Stop loading commits</button>');
+        button.click(
+            function (ev) {
+                inhibitLoading = true;
+                ev.stopPropagation();
+            });
+        headline.append(button);
+    }
+
+    function loadMoreCommits(){
+        if (inhibitLoading === true) {
+            debugOutput("Loading inhibited");
+            return;
+        }
+        let span = $(LOAD_MORE_COMMITS_SELECTOR);
+        if (span.length === 0) {
+            debugOutput("No more commits to load");
+            return;
+        }
+        span.parent().click();
+        debugOutput("Clicked the load more button");
+        setTimeout(loadMoreCommits, settings.loadMoreDelay);
+    }
+
     function refreshApprovers() {
        debugOutput("Started to load / refresh approvers")
         loadCommitHashes().then(hashList => {
@@ -219,7 +260,8 @@
             bb_appPassword: '',
             activationDelay: 5000,
             removeEmptyTds: true,
-            debugOutput: false
+            debugOutput: false,
+            loadMoreDelay: 1000,
         }
         for (let key in DEFAULT_SETTINGS) {
             let value = GM_getValue(key, '!unset!');
@@ -236,6 +278,8 @@
         identifyPrData();
         registerMutationObserver();
         addRefreshButton();
+        addLoadAllCommitsButton();
+        addStopLoadingCommitsButton();
         refreshApprovers();
     }
 
