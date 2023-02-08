@@ -163,7 +163,13 @@
                 }
                 alreadyProcessedParticipants[hash].push(pName)
             }
-            tableRow.append('<td>' + message.join('') + '</td>');
+            // find the cell containing the approvers and update (or create) it
+            let approversCell = tableRow.children().filter('td.approvers');
+            if (approversCell.length === 0) {
+                tableRow.append('<td class="approvers">' + message.join('') + '</td>');
+            }else{
+                approversCell.innerHTML = message.join();
+            }
         }
         if(settings['removeEmptyTds']){
             commitTable.find('tr > td > div:empty').remove();
