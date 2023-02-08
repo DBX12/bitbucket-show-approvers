@@ -132,7 +132,7 @@
             let hash = commitData[index].hash;
             let participants = commitData[index].participants;
             let message = [];
-            let tableRow = $(COMMIT_TABLE_SELECTOR + ' span:contains("' + hash.substr(0, 7) + '")').first().parent().parent().parent().parent();
+            let tableRow = $(COMMIT_TABLE_SELECTOR + ' span:contains("' + hash.substr(0, 7) + '")').first().parent().parent().parent().parent().parent();
             if (tableRow.length === 0) {
                 // the commit is not shown yet, do not process the entry
                 continue;
