@@ -279,6 +279,14 @@
         }
     }
 
+    function addTableHeader() {
+        let commitTable = $(COMMIT_TABLE_SELECTOR);
+        let newElement = commitTable.find("thead > tr > th:last-child").clone();
+        newElement.html('<span>Approvers</span>');
+        newElement.css('width','min-content');
+        commitTable.find('thead > tr').append(newElement);
+    }
+
 
     function startScript() {
         identifyPrData();
@@ -286,6 +294,7 @@
         addRefreshButton();
         addLoadAllCommitsButton();
         addStopLoadingCommitsButton();
+        addTableHeader();
         refreshApprovers();
     }
 
