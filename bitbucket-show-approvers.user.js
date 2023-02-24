@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show commit approvers on bitbucket
 // @namespace    http://dbx12.de/
-// @version      0.6
+// @version      0.7
 // @description  Show commit approvers
 // @author       dbx12
 // @match        https://bitbucket.org/*/*/pull-requests/*
