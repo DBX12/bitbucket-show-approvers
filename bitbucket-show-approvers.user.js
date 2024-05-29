@@ -178,26 +178,6 @@
         debugOutput(alreadyProcessedParticipants)
     }
 
-    function mutationCallback(mutationsList) {
-        for (const mutation of mutationsList) {
-            if (mutation.addedNodes.length === 0) {
-                continue;
-            }
-            for (const addedNode of mutation.addedNodes) {
-                let text = addedNode.textContent;
-                if (text.endsWith('commit') || text.endsWith('commits')) {
-                    updateCommitsHtml();
-                }
-            }
-        }
-    }
-
-    function registerMutationObserver() {
-        let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
-        let observer = new MutationObserver(mutationCallback);
-        observer.observe(headline.get(0), {childList: true})
-    }
-
     function addRefreshButton(buttonBox) {
         let button = $('<button>Update approvers</button>');
         button.click(
@@ -287,7 +267,6 @@
 
     function startScript() {
         identifyPrData();
-        registerMutationObserver();
         let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
         addRefreshButton(headline);
         addLoadAllCommitsButton(headline);
