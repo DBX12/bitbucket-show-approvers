@@ -198,19 +198,17 @@
         observer.observe(headline.get(0), {childList: true})
     }
 
-    function addRefreshButton() {
-        let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
+    function addRefreshButton(buttonBox) {
         let button = $('<button>Update approvers</button>');
         button.click(
             function (ev) {
                 refreshApprovers();
                 ev.stopPropagation();
             });
-        headline.append(button);
+        buttonBox.append(button);
     }
 
-    function addLoadAllCommitsButton() {
-        let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
+    function addLoadAllCommitsButton(buttonBox) {
         let button = $('<button>Load all commits</button>');
         button.click(
             function (ev) {
@@ -218,18 +216,17 @@
                 loadMoreCommits();
                 ev.stopPropagation();
             });
-        headline.append(button);
+        buttonBox.append(button);
     }
 
-    function addStopLoadingCommitsButton() {
-        let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
+    function addStopLoadingCommitsButton(buttonBox) {
         let button = $('<button>Stop loading commits</button>');
         button.click(
             function (ev) {
                 inhibitLoading = true;
                 ev.stopPropagation();
             });
-        headline.append(button);
+        buttonBox.append(button);
     }
 
     function loadMoreCommits(){
@@ -291,9 +288,10 @@
     function startScript() {
         identifyPrData();
         registerMutationObserver();
-        addRefreshButton();
-        addLoadAllCommitsButton();
-        addStopLoadingCommitsButton();
+        let headline = $(COMMIT_TABLE_HEADLINE_SELECTOR).parent().parent().parent();
+        addRefreshButton(headline);
+        addLoadAllCommitsButton(headline);
+        addStopLoadingCommitsButton(headline);
         addTableHeader();
         refreshApprovers();
     }
