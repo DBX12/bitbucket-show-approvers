@@ -8,7 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Setting `decorateDelay`. This setting determines how long the script waits
-  before it starts adding buttons on the commit tab
+before it starts adding buttons on the commit tab
+
+### Changed
+- Default value for `activationDelay` is now 1000. It is recommended to update
+  your settings accordingly to avoid unnecessary long waiting.
 
 ## [0.7] - 2023-02-24
 ### Added

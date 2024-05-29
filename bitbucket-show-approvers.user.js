@@ -242,7 +242,7 @@
             bb_displayName: '',
             bb_username: '',
             bb_appPassword: '',
-            activationDelay: 5000,
+            activationDelay: 1000,
             removeEmptyTds: true,
             debugOutput: false,
             loadMoreDelay: 1000,
