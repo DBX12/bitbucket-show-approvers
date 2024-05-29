@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.8] - 2024-05-29
 ### Added
 - Setting `decorateDelay`. This setting determines how long the script waits
 before it starts adding buttons on the commit tab
@@ -56,7 +58,8 @@ before it starts adding buttons on the commit tab
 ### Added
 - Initial version
 
-[Unreleased]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.7...HEAD
+[Unreleased]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.8...HEAD
+[0.8]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.7...0.8
 [0.7]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.6...0.7
 [0.6]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.5...0.6
 [0.5]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.4...0.5
