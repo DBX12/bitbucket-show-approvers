@@ -246,6 +246,7 @@
             removeEmptyTds: true,
             debugOutput: false,
             loadMoreDelay: 1000,
+            decorateDelay: 1000,
         }
         for (let key in DEFAULT_SETTINGS) {
             let value = GM_getValue(key, '!unset!');
@@ -271,10 +272,12 @@
         let lastPart = parts[parts.length-1];
         if (lastPart !== "commits") {
             debugOutput("Not on commits page yet, adding click listener");
-            document.getElementById(TAB_HEADER_ID).addEventListener('click', decoratePage);
+            document.getElementById(TAB_HEADER_ID).addEventListener('click', function(){
+                setTimeout(decoratePage, settings['decorateDelay']);
+            });
         }else{
             debugOutput("Already on commits page, continue");
-            decoratePage();
+            setTimeout(decoratePage, settings['decorateDelay']);
         }
     }
 
