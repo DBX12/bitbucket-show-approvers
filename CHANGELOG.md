@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Approvers do not appear when returning to commits view after visiting it once
+- Approvers do not appear when returning to commits view when starting the visit on the commits tab
 
 ## [0.8] - 2024-05-29
 ### Added
