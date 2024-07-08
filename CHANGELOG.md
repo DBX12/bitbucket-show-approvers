@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.9] - 2024-07-08
 ### Fixed
 - Approvers do not appear when returning to commits view after visiting it once
 - Approvers do not appear when returning to commits view when starting the visit on the commits tab
@@ -61,7 +63,8 @@ before it starts adding buttons on the commit tab
 ### Added
 - Initial version
 
-[Unreleased]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.8...HEAD
+[Unreleased]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.9...HEAD
+[0.9]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.8...0.9
 [0.8]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.7...0.8
 [0.7]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.6...0.7
 [0.6]: https://github.com/DBX12/bitbucket-show-approvers/compare/0.5...0.6
