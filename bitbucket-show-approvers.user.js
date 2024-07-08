@@ -295,6 +295,9 @@
 
 
     function decoratePage() {
+        // clear the alreadyProcessedParticipants in case we are coming back
+        // to the commits tab after viewing it earlier
+        alreadyProcessedParticipants = {};
         addButtonBox();
         addTableHeader();
         refreshApprovers();
