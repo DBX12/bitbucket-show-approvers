@@ -125,8 +125,8 @@
 
     function updateCommitsHtml() {
         let commitTable = $(COMMIT_TABLE_SELECTOR);
-        let colGroup =commitTable.find('colgroup')
-        if(colGroup.find('col.approvers').length === 0 ) {
+        let colGroup = commitTable.find('colgroup')
+        if (colGroup.find('col.approvers').length === 0) {
             colGroup.append('<col class="approvers"/>');
         }
         for (let index in commitData) {
@@ -139,14 +139,14 @@
                 continue;
             }
             for (let pName in participants) {
-                if(participants[pName].approved === false){
-                    debugOutput(pName+" has not approved")
+                if (participants[pName].approved === false) {
+                    debugOutput(pName + " has not approved")
                     continue;
                 }
-                if(alreadyProcessedParticipants.hasOwnProperty(hash)){
-                    debugOutput(hash+" is known in the alreadyProcessedParticipants object")
+                if (alreadyProcessedParticipants.hasOwnProperty(hash)) {
+                    debugOutput(hash + " is known in the alreadyProcessedParticipants object")
                     if (alreadyProcessedParticipants[hash].includes(pName)) {
-                        debugOutput("Approval of "+pName+" is already shown");
+                        debugOutput("Approval of " + pName + " is already shown");
                         continue;
                     }
                 }
@@ -159,7 +159,7 @@
                 checkmarkNode += '</span>';
                 message.push(checkmarkNode);
                 participants[pName].applied = true;
-                if (!alreadyProcessedParticipants.hasOwnProperty(hash)){
+                if (!alreadyProcessedParticipants.hasOwnProperty(hash)) {
                     alreadyProcessedParticipants[hash] = [];
                 }
                 alreadyProcessedParticipants[hash].push(pName)
@@ -168,11 +168,11 @@
             let approversCell = tableRow.children().filter('td.approvers');
             if (approversCell.length === 0) {
                 tableRow.append('<td class="approvers">' + message.join('') + '</td>');
-            }else{
+            } else {
                 approversCell.innerHTML = message.join();
             }
         }
-        if(settings['removeEmptyTds']){
+        if (settings['removeEmptyTds']) {
             commitTable.find('tr > td > div:empty').remove();
             commitTable.find('tr > td:empty').remove();
         }
@@ -210,7 +210,7 @@
         buttonBox.append(button);
     }
 
-    function loadMoreCommits(){
+    function loadMoreCommits() {
         if (inhibitLoading === true) {
             debugOutput("Loading inhibited");
             return;
@@ -226,7 +226,7 @@
     }
 
     function refreshApprovers() {
-       debugOutput("Started to load / refresh approvers")
+        debugOutput("Started to load / refresh approvers")
         loadCommitHashes().then(hashList => {
             debugOutput("Commit hashes received, querying commit details")
             handleCommitHashList(hashList).then(results => {
@@ -262,17 +262,17 @@
         let commitTable = $(COMMIT_TABLE_SELECTOR);
         let newElement = commitTable.find("thead > tr > th:last-child").clone();
         newElement.html('<span>Approvers</span>');
-        newElement.css('width','min-content');
+        newElement.css('width', 'min-content');
         commitTable.find('thead > tr').append(newElement);
     }
 
     function registerClickListenerOrContinue() {
         let url = new URL(location.href);
         let parts = url.pathname.split('/');
-        let lastPart = parts[parts.length-1];
+        let lastPart = parts[parts.length - 1];
 
         debugOutput("Adding click listener on tab header\"Commits\"");
-        document.getElementById(TAB_HEADER_ID).addEventListener('click', function(){
+        document.getElementById(TAB_HEADER_ID).addEventListener('click', function () {
             setTimeout(decoratePage, settings['decorateDelay']);
         });
 
@@ -283,7 +283,7 @@
     }
 
     function addButtonBox() {
-        let tabBody = $("#"+TAB_BODY_ID);
+        let tabBody = $("#" + TAB_BODY_ID);
         let buttonBox = $('<div id="bbca-buttons"></div>');
 
         addRefreshButton(buttonBox);
@@ -312,10 +312,10 @@
 
     function debugOutput(msg) {
         // noinspection EqualityComparisonWithCoercionJS
-        if (settings['debugOutput'] == true){
-            if(typeof msg == "string") {
+        if (settings['debugOutput'] == true) {
+            if (typeof msg == "string") {
                 console.debug("[BBCA] " + msg)
-            }else{
+            } else {
                 console.debug("[BBCA] Object follows")
                 console.debug(msg)
             }
